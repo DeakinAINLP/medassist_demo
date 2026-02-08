@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: medassist-demo
+    env: docker
+    plan: starter
+    autoDeploy: true
+    healthCheckPath: /healthz
+    envVars:
+      - key: MODEL_NAME
+        value: gpt-4o-mini
+      - key: LLM_PROVIDER
+        value: openai
+      # Set OPENAI_API_KEY + DEMO_PASSWORD in the Render dashboard (do not commit secrets)

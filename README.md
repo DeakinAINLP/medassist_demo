@@ -1,0 +1,92 @@
+# Med Conversation Assistant — Internet Demo (FastAPI)
+
+**Purpose:** a lightweight, internet-deployable demo of a *medical conversation assistant* for industry partners.
+
+**Important:** This is **demo software** for evaluation only. It does **not** provide medical diagnosis and is **not** suitable for clinical use.
+
+---
+
+## Features
+- Web chat UI + structured JSON output panel (triage + differential possibilities + next steps).
+- Rule-based emergency/urgent screen (very lightweight).
+- Basic PII redaction (demo only).
+- Optional password protection (`DEMO_PASSWORD` env var).
+- Works locally, via Docker, or on common PaaS providers.
+
+---
+
+## Quick start (local)
+
+### 1) Create a virtualenv + install
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 2) Set env vars
+**Option A: real LLM**
+```bash
+export OPENAI_API_KEY="YOUR_KEY"
+export MODEL_NAME="gpt-4o-mini"   # change if needed
+```
+
+**Option B: mock mode (no API key)**
+```bash
+export LLM_PROVIDER="mock"
+```
+
+Optional demo password:
+```bash
+export DEMO_PASSWORD="your-demo-password"
+```
+
+### 3) Run
+```bash
+uvicorn app.main:app --reload
+```
+
+Open: http://127.0.0.1:8000
+
+---
+
+## Docker
+```bash
+docker build -t medassist-demo .
+docker run -p 8000:8000 \
+  -e OPENAI_API_KEY="YOUR_KEY" \
+  -e MODEL_NAME="gpt-4o-mini" \
+  -e DEMO_PASSWORD="partner123" \
+  medassist-demo
+```
+
+---
+
+## Deploy to the internet (example: Render)
+
+1. Push this repo to GitHub.
+2. In Render: **New → Web Service → from GitHub**.
+3. Runtime: Docker (or Python).
+4. Set environment variables:
+   - `OPENAI_API_KEY`
+   - `MODEL_NAME` (optional)
+   - `DEMO_PASSWORD` (recommended)
+5. Deploy → you get a public HTTPS URL.
+
+> For a partner demo, password-protect it and avoid collecting identifiable patient information.
+
+---
+
+## Suggested “industry partner demo” talking points
+- **Structured output** (JSON) reduces risk vs free-form chat.
+- **Safety screens**: emergency escalation + no medication dosing.
+- **Next step for production**: add clinician-reviewed retrieval sources + monitoring + evaluation + compliance review.
+
+---
+
+## Next steps if you want this to look “enterprise-grade”
+- Add login (OAuth) + role-based access.
+- Add rate-limiting + abuse prevention.
+- Add retrieval from vetted guidelines (NICE/CDC/WHO) with citations.
+- Add evaluation harness: red-flag recall, hallucination rate, refusal correctness, and human review workflow.
+- Add privacy controls: data minimization, encryption at rest, retention policy, consent banner.

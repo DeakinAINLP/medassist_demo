@@ -1,0 +1,99 @@
+:root {
+  --bg: #0b1020;
+  --card: #121a33;
+  --text: #e7ecff;
+  --muted: #a7b0d6;
+  --border: rgba(255,255,255,0.12);
+  --accent: #7aa2ff;
+  --accent2: #9be7c4;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #070b16, var(--bg));
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+}
+.container { width: min(980px, calc(100% - 32px)); margin: 0 auto; }
+h1 { margin: 0 0 6px 0; font-size: 22px; }
+.subtitle { margin: 0; color: var(--muted); }
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+}
+.hint {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+#chat {
+  height: 320px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(0,0,0,0.12);
+}
+.msg { max-width: 80%; padding: 10px 12px; border-radius: 12px; margin: 10px 0; white-space: pre-wrap; }
+.msg.user { margin-left: auto; background: rgba(122,162,255,0.18); border: 1px solid rgba(122,162,255,0.25); }
+.msg.assistant { margin-right: auto; background: rgba(155,231,196,0.12); border: 1px solid rgba(155,231,196,0.20); }
+
+textarea, input[type=password] {
+  width: 100%;
+  margin-top: 10px;
+  background: rgba(0,0,0,0.2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.row { display: flex; gap: 10px; margin-top: 10px; }
+button {
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(122,162,255,0.18);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+button.secondary { background: rgba(255,255,255,0.06); }
+
+.pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(122,162,255,0.35);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.disclaimer {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.muted { color: var(--muted); }
+
+footer {
+  padding: 22px 0 28px 0;
+  color: var(--muted);
+}

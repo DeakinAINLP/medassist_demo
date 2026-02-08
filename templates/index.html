@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ app_name }}</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>{{ app_name }}</h1>
+      <p class="subtitle">
+        Demo only — not a medical device. Not for emergencies. Do not enter identifiable patient information.
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+    {% if require_password %}
+    <section class="card">
+      <h2>Access</h2>
+      <p>This demo is password protected.</p>
+      <label>Password</label>
+      <input id="password" type="password" placeholder="Enter demo password" />
+    </section>
+    {% endif %}
+
+    <section class="card">
+      <h2>Conversation</h2>
+
+      <div class="hint">
+        Try: “I’ve had a sore throat and cough for 3 days, no fever. What could it be?”
+      </div>
+
+      <div id="chat"></div>
+
+      <form id="chatForm">
+        <textarea id="userInput" rows="3" placeholder="Describe symptoms, duration, age group, relevant history (avoid names/addresses)."></textarea>
+        <div class="row">
+          <button type="submit">Send</button>
+          <button type="button" id="clearBtn" class="secondary">Clear</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Assistant Output (Structured)</h2>
+      <div id="structured"></div>
+    </section>
+
+    <section class="card">
+      <h2>Safety Notes for Partners</h2>
+      <ul>
+        <li>Rule-based urgent/emergency screen is applied before/after the LLM.</li>
+        <li>Output is structured JSON (easier to audit and to display safely).</li>
+        <li>Medication dosing is intentionally blocked in this demo.</li>
+        <li>For real deployment: add clinician-reviewed knowledge base, stronger red-teaming, monitoring, and regulatory review.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="container">
+    <small>© Demo — for evaluation only.</small>
+  </footer>
+
+  <script>
+    window.__REQUIRE_PASSWORD__ = {{ "true" if require_password else "false" }};
+  </script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
